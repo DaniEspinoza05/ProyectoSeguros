@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Cambiado a una fuente más moderna */
+    line-height: 1.6;
+    background-color: #fff3e0; /* Color de fondo naranja claro */
+    color: #333;
+}
+
+.container {
+    max-width: 800px; /* Ancho máximo del contenedor */
+    margin: 0 auto; /* Centra el contenedor */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 15px; /* Bordes redondeados */
+    background-color: #ffffff; /* Fondo blanco para el contenedor */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.    1); /* Sombra para dar profundidad */
+}
+
+/* Header Styles */
+header {
+    background: #ff9800; /* Color de fondo naranja */
+    color: white;
+    padding: 10px 20px; /* Espaciado alrededor del header */
+    align-items: center; /* Centra verticalmente el contenido */
+}
+
+.header-content {
+    display: flex; /* Utiliza flexbox para alinear el logo y el menú */
+    align-items: center; /* Centra verticalmente el contenido */
+}
+
+.logo {
+    width: 50px; /* Ajusta el tamaño del logo según sea necesario */
+    height: auto; /* Mantiene la relación de aspecto */
+    margin-right: 200px; /* Espacio entre el logo y el menú */
+    border-radius: 15px; /* Bordes redondeados */
+}
+
+h1 {
+    font-size: 2.5rem; /* Tamaño de fuente grande */
+    text-align: center; /* Centra el texto en las secciones */
+}
+
+h3 {
+    font-size: 1.2em; /* Tamaño de fuente para el subtítulo */
+    text-align: center; /* Centra el texto en las secciones */
+}
+
+/* Menu Styles */
+.menu {
+    list-style: none;
+    display: flex; /* Alinea los elementos del menú en línea */
+    padding: 0; /* Elimina el padding por defecto */
+    margin: 0; /* Elimina el margen por defecto */
+}
+
+.menu-item {
+    margin-left: 15px; /* Espacio entre los elementos del menú */
+}
+
+.menu-item a {
+    color: white; /* Color del texto del menú */
+    text-decoration: none; /* Quita el subrayado */
+    padding: 10px; /* Espaciado interno para los enlaces del menú */
+    transition: background-color 0.3s; /* Transición para el hover */
+}
+
+.menu-item a:hover {
+    background-color: #e68a00; /* Color más oscuro para el hover */
+    color: #f4f4f4; /* Color claro al pasar el mouse */
+}
+
+section {
+    margin-bottom: 30px; /* Espaciado inferior entre secciones */
+    text-align: center; /* Centra el texto en las secciones */
+}
+
+section h2 {
+    color: #ff5722; /* Color naranja más intenso */
+    font-size: 1.8rem; /* Tamaño de fuente */
+    margin-bottom: 10px; /* Espaciado inferior */
+}
+
+section p, section ol {
+    color: #333; /* Color gris oscuro */
+}
+
+ol {
+    margin-left: 33px;
+    text-align: left;
+}
+
+.img-fluid {
+    max-width: 100%; /* Asegura que las imágenes no excedan el ancho del contenedor */
+    height: auto; /* Mantiene la relación de aspecto */
+    border-radius: 10px; /* Bordes redondeados para las imágenes */
+    margin-top: 15px; /* Espaciado superior */
+}
+
+footer {
+    text-align: center; /* Centra el texto en el pie de página */
+    margin-top: 30px; /* Espaciado superior */
+    color: #777; /* Color gris claro */
+}
+
+footer a {
+    color: #ff9800; /* Color naranja */
+    text-decoration: none; /* Quita el subrayado */
+}
+
+footer a:hover {
+    text-decoration: underline; /* Subrayado al pasar el mouse */
+}
