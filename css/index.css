@@ -1,92 +1,94 @@
+/* index.css */
+
+/* Reset de márgenes y padding */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Estilo general del body */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Cambiado a una fuente más moderna */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     background-color: #fff3e0; /* Color de fondo naranja claro */
     color: #333;
 }
 
+/* Contenedor principal */
 .container {
-    max-width: 800px; /* Ancho máximo del contenedor */
-    margin: 0 auto; /* Centra el contenedor */
-    padding: 20px; /* Espaciado interno */
-    border-radius: 15px; /* Bordes redondeados */
-    background-color: #ffffff; /* Fondo blanco para el contenedor */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.    1); /* Sombra para dar profundidad */
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Header Styles */
+/* Header (barra de navegación) */
 header {
     background: #ff9800; /* Color de fondo naranja */
     color: white;
-    padding: 10px 20px; /* Espaciado alrededor del header */
-    align-items: center; /* Centra verticalmente el contenido */
-}
-
-.header-content {
-    display: flex; /* Utiliza flexbox para alinear el logo y el menú */
-    align-items: center; /* Centra verticalmente el contenido */
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Alineación entre el logo y los links */
 }
 
 .logo {
-    width: 50px; /* Ajusta el tamaño del logo según sea necesario */
-    height: auto; /* Mantiene la relación de aspecto */
-    margin-right: 200px; /* Espacio entre el logo y el menú */
-    border-radius: 15px; /* Bordes redondeados */
+    width: 50px;
+    height: auto;
+    border-radius: 15px;
 }
 
-h1 {
-    font-size: 2.5rem; /* Tamaño de fuente grande */
-    text-align: center; /* Centra el texto en las secciones */
-}
-
-h3 {
-    font-size: 1.2em; /* Tamaño de fuente para el subtítulo */
-    text-align: center; /* Centra el texto en las secciones */
-}
-
-/* Menu Styles */
 .menu {
     list-style: none;
-    display: flex; /* Alinea los elementos del menú en línea */
-    padding: 0; /* Elimina el padding por defecto */
-    margin: 0; /* Elimina el margen por defecto */
+    display: flex;
+    padding: 0;
+    margin: 0;
 }
 
 .menu-item {
-    margin-left: 15px; /* Espacio entre los elementos del menú */
+    margin-left: 15px;
 }
 
 .menu-item a {
-    color: white; /* Color del texto del menú */
-    text-decoration: none; /* Quita el subrayado */
-    padding: 10px; /* Espaciado interno para los enlaces del menú */
-    transition: background-color 0.3s; /* Transición para el hover */
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    transition: background-color 0.3s;
 }
 
 .menu-item a:hover {
-    background-color: #e68a00; /* Color más oscuro para el hover */
-    color: #f4f4f4; /* Color claro al pasar el mouse */
+    background-color: #e68a00;
+    color: #f4f4f4;
 }
 
+/* Estilo de los encabezados */
+h1 {
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+h3 {
+    font-size: 1.2em;
+    text-align: center;
+}
+
+/* Estilo de las secciones */
 section {
-    margin-bottom: 30px; /* Espaciado inferior entre secciones */
-    text-align: center; /* Centra el texto en las secciones */
+    margin-bottom: 30px;
+    text-align: center;
 }
 
 section h2 {
     color: #ff5722; /* Color naranja más intenso */
-    font-size: 1.8rem; /* Tamaño de fuente */
-    margin-bottom: 10px; /* Espaciado inferior */
+    font-size: 1.8rem;
+    margin-bottom: 10px;
 }
 
 section p, section ol {
-    color: #333; /* Color gris oscuro */
+    color: #333;
 }
 
 ol {
@@ -95,11 +97,13 @@ ol {
 }
 
 .img-fluid {
-    max-width: 100%; /* Asegura que las imágenes no excedan el ancho del contenedor */
-    height: auto; /* Mantiene la relación de aspecto */
-    border-radius: 10px; /* Bordes redondeados para las imágenes */
-    margin-top: 15px; /* Espaciado superior */
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-top: 15px;
 }
+
+/* Modal */
 .modal {
     display: none;
     position: fixed;
@@ -137,20 +141,105 @@ ol {
     text-decoration: none;
 }
 
-.form-control {
-    margin-bottom: 15px;
+/* Estilo de los botones */
+button {
+    background-color: #ffa500;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
+
+button:hover {
+    background-color: #ff8c00;
+}
+
+/* Footer */
 footer {
-    text-align: center; /* Centra el texto en el pie de página */
-    margin-top: 30px; /* Espaciado superior */
-    color: #777; /* Color gris claro */
+    text-align: center;
+    margin-top: 30px;
+    color: #777;
+    background-color: #ff9800;
+    padding: 20px;
 }
 
 footer a {
-    color: #ff9800; /* Color naranja */
-    text-decoration: none; /* Quita el subrayado */
+    color: white;
+    text-decoration: none;
 }
 
 footer a:hover {
-    text-decoration: underline; /* Subrayado al pasar el mouse */
+    text-decoration: underline;
+}
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+/* Títulos */
+h1, h2, h3 {
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+/* Formulario */
+.form-control {
+    border-radius: 5px;
+    box-shadow: none;
+}
+
+/* Botones */
+.btn {
+    border-radius: 25px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Alertas */
+.alert {
+    background-color: #28a745;
+    color: white;
+    border-radius: 5px;
+}
+
+/* Clases de espaciado */
+.mt-5 {
+    margin-top: 3rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Imágenes */
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+
+/* Adaptabilidad */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 15px 20px;
+    }
+
+    .login-container h1 {
+        font-size: 1.5em;
+    }
+    
 }
