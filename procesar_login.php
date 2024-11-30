@@ -33,28 +33,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de Sesión - SaveMe</title>
-    <!-- Vincular el archivo CSS -->
     <link href="css/login.css" rel="stylesheet">
+
 </head>
 <body>
-    <div class="login-container">
-        <h1>Iniciar Sesión</h1>
-        <form method="POST" action="login.php">
+    <div class="container mt-5">
+        <h1 class="text-center">Iniciar Sesión</h1>
+        <form method="POST" action="procesar_login.php">
             <div class="form-group">
                 <label for="username">Usuario</label>
                 <input type="text" id="username" name="username" class="form-control" placeholder="Ingresa tu usuario" required>
             </div>
-            <div class="form-group">
+            <div class="form-group mt-3">
                 <label for="password">Contraseña</label>
                 <input type="password" id="password" name="password" class="form-control" placeholder="Ingresa tu contraseña" required>
             </div>
-            
             <!-- Mostrar mensaje de error si ocurre -->
             <?php if (isset($error)): ?>
-                <p class="error-message"><?= $error ?></p>
+                <p class="text-danger mt-3 text-center"><?= $error ?></p>
             <?php endif; ?>
-
-            <button type="submit" class="btn-login">Ingresar</button>
+            <button type="submit" class="btn btn-primary btn-block mt-4">Ingresar</button>
         </form>
     </div>
 </body>
