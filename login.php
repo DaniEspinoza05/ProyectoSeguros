@@ -1,28 +1,31 @@
 <?php
-session_start(); // Iniciar sesión para mantener al usuario conectado
-include('db_connection.php'); // Archivo de conexión a la base de datos
+session_start();
+include('db_connection.php');
 
-// Habilitar errores para diagnóstico (solo en desarrollo, no en producción)
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+if (isset($_SESSION['username'])) {
+    header("Location: index.php"); // Redirige si ya está autenticado
+    exit();
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Obtener datos del formulario y sanitizarlos
     $username = $conn->real_escape_string($_POST['username']);
     $password = $conn->real_escape_string($_POST['password']);
 
-    // Consulta a la base de datos para verificar el usuario
-    $sql = "SELECT * FROM usuarios WHERE username = '$username' AND password = '$password'";
-    $result = $conn->query($sql);
+    $query = "SELECT * FROM usuarios WHERE username = '$username'";
+    $result = $conn->query($query);
 
     if ($result->num_rows == 1) {
-        // Si las credenciales son correctas, iniciar sesión
-        $_SESSION['username'] = $username;
-        header("Location: dashboard.php"); // Redirigir al dashboard o página principal
-        exit();
+        $user = $result->fetch_assoc();
+        // Verificar la contraseña con password_verify
+        if (password_verify($password, $user['password'])) {
+            $_SESSION['username'] = $username;
+            header("Location: index.php");
+            exit();
+        } else {
+            $error = "Contraseña incorrecta.";
+        }
     } else {
-        // Si son incorrectas, mostrar un mensaje de error
-        $error = "Usuario o contraseña incorrectos.";
+        $error = "Usuario no encontrado.";
     }
 }
 ?>
@@ -59,3 +62,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 </body>
 </html>
+

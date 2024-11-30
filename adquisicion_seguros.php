@@ -1,4 +1,7 @@
-<?php include('navbar.php'); ?>
+<?php 
+include('auth.php');
+include('navbar.php');
+ ?>
 
 <!DOCTYPE html>
 <html lang="es">
