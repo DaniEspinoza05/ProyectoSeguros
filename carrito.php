@@ -1,4 +1,4 @@
-<?php session_start(); include('config.php'); ?>
+<?php session_start(); include('db_connection.php'); ?>
 
 <!DOCTYPE html>
 <html lang="es">

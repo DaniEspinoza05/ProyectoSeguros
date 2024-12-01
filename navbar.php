@@ -14,7 +14,6 @@
                 <li class="menu-item"><a href="administrativo.php">Administrativo</a></li>
                 <li class="menu-item"><a href="carrito.php">Carrito</a></li>
                 <?php if (isset($_SESSION['username'])): ?>
-                    <li class="menu-item"><a href="dashboard.php">Bienvenido, <?= $_SESSION['username'] ?></a></li>
                     <li class="menu-item"><a href="logout.php">Cerrar sesión</a></li>
                 <?php else: ?>
                     <li class="menu-item"><a href="login.php">Login</a></li>

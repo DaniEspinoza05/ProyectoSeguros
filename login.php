@@ -1,25 +1,37 @@
 <?php
 session_start();
-include('db_connection.php');
+include('db_connection.php'); // Archivo de conexión a la base de datos
 
+// Si el usuario ya está autenticado, redirigir
 if (isset($_SESSION['username'])) {
-    header("Location: index.php"); // Redirige si ya está autenticado
+    header("Location: index.php");
     exit();
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $conn->real_escape_string($_POST['username']);
-    $password = $conn->real_escape_string($_POST['password']);
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-    $query = "SELECT * FROM usuarios WHERE username = '$username'";
-    $result = $conn->query($query);
+    // Usar consultas preparadas para evitar inyecciones SQL
+    $stmt = $conn->prepare("SELECT * FROM usuarios WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result->num_rows == 1) {
         $user = $result->fetch_assoc();
-        // Verificar la contraseña con password_verify
+        // Verificar la contraseña
         if (password_verify($password, $user['password'])) {
+            // Guardar información en la sesión
             $_SESSION['username'] = $username;
-            header("Location: index.php");
+            $_SESSION['rol'] = $user['rol']; // Guardar el rol del usuario
+
+            // Redirigir según el rol
+            if ($_SESSION['rol'] == 1) {
+                header("Location: index.php"); // Panel administrativo
+            } else {
+                header("Location: index.php"); // Página normal para usuarios
+            }
             exit();
         } else {
             $error = "Contraseña incorrecta.";
@@ -36,7 +48,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de Sesión - SaveMe</title>
-    <!-- Vincular el archivo CSS -->
     <link href="css/login.css" rel="stylesheet">
 </head>
 <body>
@@ -54,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             <!-- Mostrar mensaje de error si ocurre -->
             <?php if (isset($error)): ?>
-                <p class="error-message"><?= $error ?></p>
+                <p class="error-message"><?= htmlspecialchars($error) ?></p>
             <?php endif; ?>
 
             <button type="submit" class="btn-login">Ingresar</button>
@@ -62,4 +73,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 </body>
 </html>
-
