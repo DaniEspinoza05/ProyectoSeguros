@@ -10,97 +10,117 @@ include('navbar.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nuestros Seguros - SaveMe</title>
 
-    <!-- Incluir el archivo CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet"> <!-- Bootstrap para estilos comunes -->
-    <link href="css/index.css" rel="stylesheet"> <!-- Ajusta la ruta si es necesario para que apunte a tu archivo CSS general -->
+    <!-- Incluir Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Incluir estilos personalizados -->
+    <link href="css/index.css" rel="stylesheet"> <!-- Asegúrate de ajustar la ruta si es necesario -->
 </head>
 <body>
     <main class="container mt-5">
-        <h1>Nuestros Seguros</h1>
-        <p>Explora nuestra gama de seguros diseñados para brindarte la mejor protección en diferentes aspectos de tu vida. Descubre cuál se adapta a tus necesidades y cómo podemos ayudarte a estar cubierto en todo momento.</p>
+        <!-- Título principal -->
+        <div class="text-center mb-5">
+            <h1 class="fw-bold text-primary">Nuestros Seguros</h1>
+            <p class="lead">Explora nuestra gama de seguros diseñados para protegerte a ti y a tu familia en todo momento.</p>
+        </div>
 
-        <section class="row">
-            <!-- Seguro 1: Seguro de Salud -->
+        <!-- Tarjetas de seguros -->
+        <section class="row g-4">
+            <!-- Seguro de Salud -->
             <div class="col-md-4">
-                <div class="card">
+                <div class="card shadow border-0">
                     <img src="./images/seguro-salud.jpg" class="card-img-top" alt="Seguro de Salud">
                     <div class="card-body">
-                        <h5 class="card-title">Seguro de Salud</h5>
-                        <p class="card-text">
-                            Nuestro seguro de salud te brinda cobertura en caso de emergencias médicas, consultas con especialistas y hospitalización. Además, tienes acceso a una red de hospitales y clínicas de alta calidad. 
-                            <br><br>
-                            <strong>Características:</strong>
-                            <ul>
-                                <li>Cobertura amplia para emergencias médicas.</li>
-                                <li>Acceso a consultas con médicos especialistas.</li>
-                                <li>Hospitalización y cirugías cubiertas.</li>
-                                <li>Atención médica en el hogar en casos específicos.</li>
-                            </ul>
-                            <strong>Precio:</strong> Desde $199/mes.
+                        <h5 class="card-title fw-bold text-primary">Seguro de Salud</h5>
+                        <p class="card-text text-muted">
+                            Cobertura integral para emergencias médicas, consultas y hospitalización. 
                         </p>
+                        <ul class="list-unstyled small text-secondary">
+                            <li>✔ Emergencias médicas</li>
+                            <li>✔ Consultas con especialistas</li>
+                            <li>✔ Hospitalización y cirugías</li>
+                        </ul>
+                        <p class="fw-bold text-success">Desde $199/mes</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Seguro 2: Seguro de Vida -->
+            <!-- Seguro de Vida -->
             <div class="col-md-4">
-                <div class="card">
+                <div class="card shadow border-0">
                     <img src="./images/seguro-vida.jpg" class="card-img-top" alt="Seguro de Vida">
                     <div class="card-body">
-                        <h5 class="card-title">Seguro de Vida</h5>
-                        <p class="card-text">
-                            Este seguro está diseñado para garantizar la estabilidad financiera de tus seres queridos en caso de tu fallecimiento o incapacidad. Con el seguro de vida, tu familia estará protegida económicamente. 
-                            <br><br>
-                            <strong>Características:</strong>
-                            <ul>
-                                <li>Protección económica a tus beneficiarios.</li>
-                                <li>Cobertura ante fallecimiento o incapacidad.</li>
-                                <li>Plan flexible con distintas opciones de cobertura.</li>
-                                <li>Beneficios adicionales como asistencia legal o psicológica.</li>
-                            </ul>
-                            <strong>Precio:</strong> Desde $250/mes.
+                        <h5 class="card-title fw-bold text-primary">Seguro de Vida</h5>
+                        <p class="card-text text-muted">
+                            Protección económica para tus seres queridos en caso de fallecimiento o incapacidad.
                         </p>
+                        <ul class="list-unstyled small text-secondary">
+                            <li>✔ Beneficiarios protegidos</li>
+                            <li>✔ Asistencia legal y psicológica</li>
+                            <li>✔ Cobertura flexible</li>
+                        </ul>
+                        <p class="fw-bold text-success">Desde $250/mes</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Seguro 3: Seguro de Automóvil -->
+            <!-- Seguro de Automóvil -->
             <div class="col-md-4">
-                <div class="card">
+                <div class="card shadow border-0">
                     <img src="./images/seguro-auto.jpg" class="card-img-top" alt="Seguro de Automóvil">
                     <div class="card-body">
-                        <h5 class="card-title">Seguro de Automóvil</h5>
-                        <p class="card-text">
-                            El seguro de automóvil te protege contra accidentes, robo, daños materiales, y mucho más. Ofrecemos cobertura integral para cualquier eventualidad en la que se vea involucrado tu vehículo. 
-                            <br><br>
-                            <strong>Características:</strong>
-                            <ul>
-                                <li>Cobertura ante accidentes, robo y daños materiales.</li>
-                                <li>Asistencia en carretera las 24 horas.</li>
-                                <li>Opciones de cobertura a terceros o todo riesgo.</li>
-                                <li>Descuentos especiales en talleres asociados.</li>
-                            </ul>
-                            <strong>Precio:</strong> Desde $150/mes.
+                        <h5 class="card-title fw-bold text-primary">Seguro de Automóvil</h5>
+                        <p class="card-text text-muted">
+                            Cobertura completa para accidentes, robo y daños materiales.
                         </p>
+                        <ul class="list-unstyled small text-secondary">
+                            <li>✔ Asistencia en carretera</li>
+                            <li>✔ Cobertura integral</li>
+                            <li>✔ Descuentos en talleres</li>
+                        </ul>
+                        <p class="fw-bold text-success">Desde $150/mes</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section>
-            <h2>¿Por qué elegir SaveMe?</h2>
-            <p>En SaveMe, nos comprometemos a brindarte la mejor protección en cada uno de nuestros seguros. Con una atención al cliente personalizada y la mejor asesoría, buscamos darte tranquilidad a ti y a tu familia.</p>
-            <ul>
-                <li>Atención 24/7</li>
-                <li>Cobertura integral en múltiples áreas</li>
-                <li>Planes personalizados a tus necesidades</li>
-                <li>Red de hospitales y clínicas de alta calidad</li>
-                <li>Descuentos y beneficios exclusivos para nuestros clientes</li>
-            </ul>
+        <!-- Información adicional -->
+        <section class="mt-5">
+            <div class="text-center">
+                <h2 class="fw-bold text-primary">¿Por qué elegir SaveMe?</h2>
+                <p class="text-muted">En SaveMe, nos comprometemos a ofrecerte tranquilidad con seguros diseñados a tu medida.</p>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item bg-transparent text-muted">
+                            <span class="fw-bold text-success">✔</span> Atención 24/7
+                        </li>
+                        <li class="list-group-item bg-transparent text-muted">
+                            <span class="fw-bold text-success">✔</span> Cobertura integral
+                        </li>
+                        <li class="list-group-item bg-transparent text-muted">
+                            <span class="fw-bold text-success">✔</span> Planes personalizados
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item bg-transparent text-muted">
+                            <span class="fw-bold text-success">✔</span> Red de hospitales
+                        </li>
+                        <li class="list-group-item bg-transparent text-muted">
+                            <span class="fw-bold text-success">✔</span> Beneficios exclusivos
+                        </li>
+                        <li class="list-group-item bg-transparent text-muted">
+                            <span class="fw-bold text-success">✔</span> Asesoría personalizada
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </section>
-
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <?php include('footer.php'); ?>
 </body>
 </html>
