@@ -1,6 +1,17 @@
 <?php
 session_start();
 include('navbar.php');
+include('db_connection.php'); // Conexión a la base de datos
+
+// Consulta para obtener los seguros disponibles
+$query = "SELECT id, nombre, tipo FROM seguros WHERE fecha_disponible_desde <= CURDATE() AND fecha_disponible_hasta >= CURDATE()";
+$result = $conn->query($query);
+$seguros = [];
+if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $seguros[] = $row; // Guardamos cada seguro en un array
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -9,101 +20,95 @@ include('navbar.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de Pólizas - SaveMe</title>
-
-    <!-- Incluir Bootstrap y tu archivo CSS común -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/index.css" rel="stylesheet">
 </head>
 <body>
-    <main class="container mt-5">
-        <!-- Título y descripción -->
-        <div class="text-center">
-            <h1 class="display-4 mb-3">Calculadora de Pólizas</h1>
-            <p class="lead">¡Obtén un estimado de tu póliza según las opciones que elijas!</p>
-        </div>
-
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Calculadora de Pólizas</h1>
+        <p class="text-center lead">¡Obtén un estimado de tu póliza según las opciones que elijas!</p>
+        
         <!-- Formulario de la calculadora -->
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <form id="calculadoraForm" method="POST" action="calculadora.php" class="bg-light p-4 rounded shadow-sm">
-                    <div class="mb-3">
-                        <label for="tipoSeguro" class="form-label">Tipo de Seguro</label>
-                        <select class="form-select" id="tipoSeguro" name="tipoSeguro" required>
-                            <option value="">Selecciona un tipo de seguro</option>
-                            <option value="salud">Seguro de Salud</option>
-                            <option value="vida">Seguro de Vida</option>
-                            <option value="auto">Seguro de Automóvil</option>
-                        </select>
-                    </div>
+        <form action="" method="POST" class="shadow p-4 rounded" style="background-color: #f8f9fa;">
+            <!-- Selección de Seguro -->
+            <section class="mb-4">
+                <h2 class="h4 mb-3">1. Selección del Tipo de Seguro</h2>
+                <div class="form-group mb-3">
+                    <label for="tipo_seguro" class="form-label">Elige el tipo de seguro:</label>
+                    <select id="tipo_seguro" name="tipo_seguro" class="form-select" required>
+                        <option value="" disabled selected>Seleccione un seguro</option>
+                        <?php foreach ($seguros as $seguro): ?>
+                            <option value="<?= htmlspecialchars($seguro['id']) ?>">
+                                <?= htmlspecialchars($seguro['nombre'] . " - " . $seguro['tipo']) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </section>
 
-                    <div class="mb-3">
-                        <label for="cobertura" class="form-label">Cobertura</label>
-                        <select class="form-select" id="cobertura" name="cobertura" required>
-                            <option value="">Selecciona el nivel de cobertura</option>
-                            <option value="basico">Básico</option>
-                            <option value="medio">Medio</option>
-                            <option value="alto">Alto</option>
-                        </select>
-                    </div>
+            <!-- Cobertura Adicional -->
+            <section class="mb-4">
+                <h2 class="h4 mb-3">2. Cobertura Adicional</h2>
+                <div class="form-group mb-3">
+                    <label for="cobertura" class="form-label">Cobertura Adicional (opcional):</label>
+                    <input type="text" class="form-control" id="cobertura" name="cobertura">
+                </div>
+            </section>
 
-                    <div class="mb-3">
-                        <label for="duracion" class="form-label">Duración (en años)</label>
-                        <input type="number" class="form-control" id="duracion" name="duracion" required min="1" max="10">
-                    </div>
+            <!-- Duración -->
+            <section class="mb-4">
+                <h2 class="h4 mb-3">3. Duración de la Póliza</h2>
+                <div class="form-group mb-3">
+                    <label for="duracion" class="form-label">Duración (en años):</label>
+                    <input type="number" class="form-control" id="duracion" name="duracion" min="1" max="10" required>
+                </div>
+            </section>
 
-                    <div class="mb-3 text-center">
-                        <button type="submit" class="btn btn-primary btn-lg w-100">Calcular</button>
-                    </div>
-                </form>
+            <!-- Botón de envío -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary btn-lg">Calcular</button>
             </div>
-        </div>
+        </form>
 
-        <!-- Resultados de la calculadora -->
-        <?php if ($_SERVER['REQUEST_METHOD'] == 'POST'): ?>
-            <?php
-                // Recoger los datos del formulario
-                $tipoSeguro = $_POST['tipoSeguro'];
-                $cobertura = $_POST['cobertura'];
-                $duracion = $_POST['duracion'];
+        <?php
+        // Calcular el precio cuando se envía el formulario
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['tipo_seguro'], $_POST['duracion'])) {
+            $tipoSeguroId = $_POST['tipo_seguro'];
+            $cobertura = $_POST['cobertura'];
+            $duracion = $_POST['duracion'];
 
-                // Establecer tarifas base para cada tipo de seguro
-                $tarifas = [
-                    'salud' => 150,
-                    'vida' => 200,
-                    'auto' => 120
-                ];
+            // Obtener los datos del seguro seleccionado desde la base de datos
+            $query = $conn->query("SELECT * FROM seguros WHERE id = $tipoSeguroId");
+            $seguro = $query->fetch_assoc();
 
-                // Modificadores de cobertura
-                $coberturaMultiplicadores = [
-                    'basico' => 1.0,
-                    'medio' => 1.2,
-                    'alto' => 1.5
-                ];
+            if ($seguro) {
+                // Calcular el precio total basado en la prima mensual y la duración
+                $primaMensual = $seguro['prima_mensual'];
+                $precioFinal = $primaMensual * 12 * $duracion; // Total por la duración en años (12 meses por año)
 
-                // Calcular el precio base según el tipo de seguro
-                $precioBase = $tarifas[$tipoSeguro];
-
-                // Aplicar el multiplicador de cobertura
-                $precioCobertura = $precioBase * $coberturaMultiplicadores[$cobertura];
-
-                // Calcular el precio final (dependiendo de la duración)
-                $precioFinal = $precioCobertura * $duracion;
-            ?>
-
+                // Si hay cobertura adicional, sumar un valor simbólico (por ejemplo, $50 extra por cobertura adicional)
+                if (!empty($cobertura)) {
+                    $precioFinal += 50; // Esto puede ajustarse
+                }
+        ?>
+            <!-- Mostrar los resultados -->
             <div class="alert alert-success mt-4">
                 <h4 class="alert-heading">Resultado Estimado</h4>
-                <p><strong>Tipo de Seguro:</strong> <?= ucfirst($tipoSeguro) ?></p>
-                <p><strong>Cobertura:</strong> <?= ucfirst($cobertura) ?></p>
+                <p><strong>Seguro Seleccionado:</strong> <?= htmlspecialchars($seguro['nombre']) ?></p>
+                <p><strong>Descripción:</strong> <?= htmlspecialchars($seguro['descripcion']) ?></p>
+                <p><strong>Cobertura Adicional:</strong> <?= htmlspecialchars($cobertura) ?: 'Ninguna' ?></p>
                 <p><strong>Duración:</strong> <?= $duracion ?> años</p>
                 <p><strong>Precio Estimado de la Póliza:</strong> $<?= number_format($precioFinal, 2) ?></p>
             </div>
-        <?php endif; ?>
-    </main>
+        <?php
+            } else {
+                echo "<div class='alert alert-danger mt-4'>No se pudo encontrar el seguro seleccionado.</div>";
+            }
+        }
+        ?>
+    </div>
 
-    <!-- Incluir jQuery y Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <?php include('footer.php'); ?>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
