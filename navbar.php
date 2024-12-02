@@ -7,7 +7,7 @@
         <nav>
             <ul class="menu">
                 <li class="menu-item"><a href="index.php">Inicio</a></li>
-                <li class="menu-item"><a href="adquisicion_seguros.php">Nuestros Seguros</a></li>
+                <li class="menu-item"><a href="personalizar_seguro.php">Personalizar Seguro</a></li>
                 <li class="menu-item"><a href="seguros.php">Seguros</a></li>
                 <li class="menu-item"><a href="calculadora.php">Calculadora de Pólizas</a></li>
                 <li class="menu-item"><a href="sobre-nosotros.php">Sobre Nosotros</a></li>
