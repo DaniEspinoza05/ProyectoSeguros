@@ -11,7 +11,9 @@
                 <li class="menu-item"><a href="seguros.php">Seguros</a></li>
                 <li class="menu-item"><a href="calculadora.php">Calculadora de Pólizas</a></li>
                 <li class="menu-item"><a href="sobre-nosotros.php">Sobre Nosotros</a></li>
-                <li class="menu-item"><a href="administrativo.php">Administrativo</a></li>
+                <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1): ?>
+                    <li class="menu-item"><a href="administrativo.php">Administrativo</a></li>
+                <?php endif; ?>
                 <li class="menu-item"><a href="carrito.php">Carrito</a></li>
                 <?php if (isset($_SESSION['username'])): ?>
                     <li class="menu-item"><a href="logout.php">Cerrar sesión</a></li>
