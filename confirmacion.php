@@ -19,13 +19,13 @@ $monto = number_format((float)$_GET['monto'], 2);
     <main class="confirmation-container">
         <div class="confirmation-box">
             <div class="icon-check">
-                <i>&#10003;</i> <!-- Esto representa un checkmark, puedes reemplazarlo por un ícono SVG o una imagen -->
+                <i>&#10003;</i> 
             </div>
-            <h1>¡Seguro Adquirido con Éxito!</h1>
+            <h1>¡Seguro Agregado al Carrito con Éxito!</h1>
             <p>Gracias por confiar en <strong>SaveMe</strong>. Hemos registrado correctamente tu adquisición de seguro.</p>
             <p><strong>Monto Total:</strong> $<?= $monto ?></p>
-            <p>Pronto recibirás un correo electrónico con los detalles de tu póliza personalizada.</p>
-            <a href="adquisicion_seguros.php" class="btn-primary">Volver a la página anterior</a>
+            <p>Al finalizar la compra, recibirás un correo electrónico con los detalles de tu póliza personalizada.</p>
+            <a href="personalizar_seguro.php" class="btn-primary">Volver a la página anterior</a>
         </div>
     </main>
 </body>
