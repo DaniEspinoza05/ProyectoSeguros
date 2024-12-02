@@ -96,7 +96,7 @@ include('navbar.php');
                         <div class="card-body text-center">
                             <h5 class="card-title">Seguros Personalizados</h5>
                             <p class="card-text">Descubre todas las opciones que tenemos para protegerte a ti y a los tuyos.</p>
-                            <a href="personalizar_seguro.php" class="btn btn-primary">Ver Seguros</a>
+                            <a href="personalizar_seguro.php" class="btn btn-primary">Personalizar</a>
                         </div>
                     </div>
                 </div>
@@ -107,7 +107,7 @@ include('navbar.php');
                         <div class="card-body text-center">
                             <h5 class="card-title">Algunos de nuestros planes</h5>
                             <p class="card-text">Te enseñamos algunos seguros que te podrían interesar. Contamos con opciones competitivas</p>
-                            <a href="seguros.php" class="btn btn-primary">Contáctanos</a>
+                            <a href="seguros.php" class="btn btn-primary">Ver Seguros</a>
                         </div>
                     </div>
                 </div>
