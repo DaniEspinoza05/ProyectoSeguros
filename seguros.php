@@ -28,7 +28,7 @@ include('navbar.php');
             <!-- Seguro de Salud -->
             <div class="col-md-4">
                 <div class="card shadow border-0">
-                    <img src="./images/seguro-salud.jpg" class="card-img-top" alt="Seguro de Salud">
+                    <img src="./images/salud.jpg" class="card-img-top" alt="Seguro de Salud">
                     <div class="card-body">
                         <h5 class="card-title fw-bold text-primary">Seguro de Salud</h5>
                         <p class="card-text text-muted">
@@ -47,7 +47,7 @@ include('navbar.php');
             <!-- Seguro de Vida -->
             <div class="col-md-4">
                 <div class="card shadow border-0">
-                    <img src="./images/seguro-vida.jpg" class="card-img-top" alt="Seguro de Vida">
+                    <img src="./images/vida.jpg" class="card-img-top" alt="Seguro de Vida">
                     <div class="card-body">
                         <h5 class="card-title fw-bold text-primary">Seguro de Vida</h5>
                         <p class="card-text text-muted">
@@ -66,7 +66,7 @@ include('navbar.php');
             <!-- Seguro de Automóvil -->
             <div class="col-md-4">
                 <div class="card shadow border-0">
-                    <img src="./images/seguro-auto.jpg" class="card-img-top" alt="Seguro de Automóvil">
+                    <img src="./images/vehiculo.jpg" class="card-img-top" alt="Seguro de Automóvil">
                     <div class="card-body">
                         <h5 class="card-title fw-bold text-primary">Seguro de Automóvil</h5>
                         <p class="card-text text-muted">

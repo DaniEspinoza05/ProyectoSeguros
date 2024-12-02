@@ -17,13 +17,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $userId = $resultUser->fetch_assoc()['id'];
 
     // Datos del formulario
-    $tipo_seguro = $conn->real_escape_string($_POST['tipo_seguro']);
+    $tipo_seguro = (int)$_POST['tipo_seguro']; // Cambiado a id
     $cobertura = isset($_POST['cobertura']) ? implode(", ", $_POST['cobertura']) : '';
     $periodo = (int)$_POST['periodo'];
     $metodo_pago = $conn->real_escape_string($_POST['metodo_pago']);
 
-    // Buscar el seguro seleccionado
-    $querySeguro = "SELECT id, prima_mensual FROM seguros WHERE tipo = '$tipo_seguro'";
+    // Buscar el seguro seleccionado por id
+    $querySeguro = "SELECT id, prima_mensual FROM seguros WHERE id = '$tipo_seguro'";
     $resultSeguro = $conn->query($querySeguro);
     if ($resultSeguro->num_rows > 0) {
         $seguro = $resultSeguro->fetch_assoc();
@@ -40,18 +40,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $queryPersonalizacion = "
                 INSERT INTO personalizacion_polizas (id_usuario, id_seguro, cobertura_adicional, periodo)
                 VALUES ($userId, $seguroId, '$cobertura', $periodo)";
-            $conn->query($queryPersonalizacion);
-
-            // Registrar el pago en `pagos`
-            $montoTotal = $primaMensual * $periodo;
-            $queryPago = "
-                INSERT INTO pagos (id_usuario, id_seguro, id_metodo_pago, monto)
-                VALUES ($userId, $seguroId, $metodoPagoId, $montoTotal)";
-            $conn->query($queryPago);
-
-            // Redirigir al usuario con un mensaje de éxito
-            header("Location: confirmacion.php?status=success&monto=$montoTotal");
-            exit();
+            if ($conn->query($queryPersonalizacion) === TRUE) {
+                // Registrar el pago en `pagos`
+                $montoTotal = $primaMensual * $periodo;
+                $queryPago = "
+                    INSERT INTO pagos (id_usuario, id_seguro, id_metodo_pago, monto)
+                    VALUES ($userId, $seguroId, $metodoPagoId, $montoTotal)";
+                if ($conn->query($queryPago) === TRUE) {
+                    // Redirigir al usuario con un mensaje de éxito
+                    header("Location: confirmacion.php?status=success&monto=$montoTotal");
+                    exit();
+                } else {
+                    echo "Error en el pago: " . $conn->error;
+                }
+            } else {
+                echo "Error en la personalización de la póliza: " . $conn->error;
+            }
         } else {
             echo "Método de pago no válido.";
         }

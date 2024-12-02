@@ -10,39 +10,137 @@ include('navbar.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenido a SaveMe</title>
 
-    <!-- Incluir el archivo CSS -->
-    <link href="css/index.css" rel="stylesheet"> <!-- Asegúrate de que la ruta sea correcta -->
+    <!-- Fuentes y Bootstrap -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet"> 
+
+
+    <!-- Estilos personalizados -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .hero {
+            background: url('./images/hero.jpg') center/cover no-repeat;
+            height: 400px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .cta-button {
+            background-color: #f67c01;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .cta-button:hover {
+            background-color: #d66b01;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 10px;
+        }
+        .stat {
+            text-align: center;
+        }
+        .testimonio {
+            font-style: italic;
+            color: #555;
+        }
+    </style>
 </head>
 <body>
-    <!-- Principal -->
-    <main class="container mt-5">
-        <h1 class="text-center">Bienvenido a SaveMe</h1>
-        <h3 class="text-center">Te protegemos a toda costa</h3>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div>
+            <h1 class="display-4">Protección que Inspira Confianza</h1>
+            <p class="lead">En SaveMe, hacemos que el seguro sea simple y accesible.</p>
+            <a href="registro.php" class="cta-button">Regístrate Ahora</a>
+        </div>
+    </div>
 
-        <section class="mt-5">
-            <h2 class="text-center text-orange">Los seguros más confiables y amigables a su bolsillo</h2>
-            <p class="text-center">Contamos con los precios más competitivos en el mercado con las pólizas más completas en todo el campo.</p>
-            <img src="./images/index1.jpg" alt="Seguros confiables" class="img-fluid rounded">
+    <!-- Contenido Principal -->
+    <main class="container my-5">
+        <!-- Promociones -->
+        <section class="mb-5">
+            <h2 class="text-center mb-4">Promociones del Mes</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card shadow-sm">
+                        <img src="./images/promo1.jpg" class="card-img-top" alt="Seguro Salud">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Seguro de Salud</h5>
+                            <p class="card-text">¡50% de descuento en el primer año para nuevos clientes!</p>
+                            <a href="#" class="btn btn-primary">Cotiza Ahora</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-sm">
+                        <img src="./images/promo2.jpg" class="card-img-top" alt="Seguro de Vida">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Seguro de Vida</h5>
+                            <p class="card-text">Cobertura completa con descuentos para familias.</p>
+                            <a href="#" class="btn btn-primary">Cotiza Ahora</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-sm">
+                        <img src="./images/promo3.jpg" class="card-img-top" alt="Seguro Automotriz">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Seguro Automotriz</h5>
+                            <p class="card-text">¡Recibe un chequeo mecánico gratis al contratar!</p>
+                            <a href="#" class="btn btn-primary">Cotiza Ahora</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <section class="mt-5">
-            <h2 class="text-center text-orange">Nos ahorramos el papeleo fastidioso</h2>
-            <h3 class="text-center">Puede realizar su registro en cuestión de minutos:</h3>
-            <ol class="text-left mx-auto" style="max-width: 600px;">
-                <li>Seleccione el tipo de seguro al que gustaría aplicar y cotizar.</li>
-                <li>Realice y envíe un breve formulario con la información necesaria para su registro.</li>
-                <li>En cuestión de un par de días, un agente nuestro se encargará de contactarlo e informarle todo sobre su póliza y cotización.</li>
-            </ol>
-            <img src="./images/index2.jpg" alt="Registro rápido" class="img-fluid rounded">
+        <!-- Testimonios -->
+        <section class="my-5">
+            <h2 class="text-center mb-4">Lo que dicen nuestros clientes</h2>
+            <div class="testimonio text-center">
+                <p>"Gracias a SaveMe, estoy tranquilo sabiendo que mi familia está protegida. Su atención al cliente es insuperable." - <strong>Juan Pérez</strong></p>
+                <p>"Contratar mi seguro fue tan fácil y rápido, además de ser súper claro." - <strong>María González</strong></p>
+            </div>
         </section>
 
-        <section class="mt-5">
-            <h2 class="text-center text-orange">¿Por qué elegir SaveMe?</h2>
-            <p class="text-center">Ofrecemos atención personalizada y asesoría en cada paso del proceso.</p>
-            <img src="./images/index3.jpeg" alt="Atención personalizada" class="img-fluid rounded">
+        <!-- Estadísticas -->
+        <section class="mb-5">
+            <h2 class="text-center mb-4">Nuestros Números Hablan</h2>
+            <div class="stats">
+                <div class="stat">
+                    <h3>10,000+</h3>
+                    <p>Clientes Satisfechos</p>
+                </div>
+                <div class="stat">
+                    <h3>15 Años</h3>
+                    <p>De Experiencia</p>
+                </div>
+                <div class="stat">
+                    <h3>24/7</h3>
+                    <p>Asistencia Disponible</p>
+                </div>
+            </div>
         </section>
     </main>
 
+    <!-- Footer -->
     <?php include('footer.php'); ?>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

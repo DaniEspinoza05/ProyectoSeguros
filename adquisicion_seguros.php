@@ -1,6 +1,17 @@
 <?php
 session_start();
 include('navbar.php');
+include('db_connection.php'); // Conexión a la base de datos
+
+// Consulta para obtener los seguros disponibles
+$query = "SELECT id, nombre, tipo FROM seguros WHERE fecha_disponible_desde <= CURDATE() AND fecha_disponible_hasta >= CURDATE()";
+$result = $conn->query($query);
+$seguros = [];
+if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $seguros[] = $row; // Guardamos cada seguro en un array
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -26,12 +37,12 @@ include('navbar.php');
                 <div class="form-group mb-3">
                     <label for="tipo_seguro" class="form-label">Elige el tipo de seguro:</label>
                     <select id="tipo_seguro" name="tipo_seguro" class="form-select" required>
-                        <option value="" disabled selected>Seleccione un tipo de seguro</option>
-                        <option value="Salud">Seguro de Salud</option>
-                        <option value="Vida">Seguro de Vida</option>
-                        <option value="Automóviles">Seguro de Automóvil</option>
-                        <option value="Propiedades">Seguro de Propiedades</option>
-                        <option value="Viajes">Seguro de Viajes</option>
+                        <option value="" disabled selected>Seleccione un seguro</option>
+                        <?php foreach ($seguros as $seguro): ?>
+                            <option value="<?= htmlspecialchars($seguro['id']) ?>">
+                                <?= htmlspecialchars($seguro['nombre'] . " - " . $seguro['tipo']) ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
             </section>

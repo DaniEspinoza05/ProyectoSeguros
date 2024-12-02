@@ -10,45 +10,53 @@ include('navbar.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de Pólizas - SaveMe</title>
 
-    <!-- Incluir el archivo CSS común -->
-    <link href="css/index.css" rel="stylesheet"> <!-- Ajusta la ruta si es necesario -->
+    <!-- Incluir Bootstrap y tu archivo CSS común -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
 </head>
 <body>
     <main class="container mt-5">
-        <h1 class="text-center">Calculadora de Pólizas</h1>
-        <p class="text-center">Utiliza nuestra calculadora para obtener un estimado del costo de tu póliza según las opciones que elijas.</p>
+        <!-- Título y descripción -->
+        <div class="text-center">
+            <h1 class="display-4 mb-3">Calculadora de Pólizas</h1>
+            <p class="lead">¡Obtén un estimado de tu póliza según las opciones que elijas!</p>
+        </div>
 
         <!-- Formulario de la calculadora -->
-        <form id="calculadoraForm" method="POST" action="calculadora.php">
-            <div class="mb-3">
-                <label for="tipoSeguro" class="form-label">Tipo de Seguro</label>
-                <select class="form-select" id="tipoSeguro" name="tipoSeguro" required>
-                    <option value="">Selecciona un tipo de seguro</option>
-                    <option value="salud">Seguro de Salud</option>
-                    <option value="vida">Seguro de Vida</option>
-                    <option value="auto">Seguro de Automóvil</option>
-                </select>
-            </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form id="calculadoraForm" method="POST" action="calculadora.php" class="bg-light p-4 rounded shadow-sm">
+                    <div class="mb-3">
+                        <label for="tipoSeguro" class="form-label">Tipo de Seguro</label>
+                        <select class="form-select" id="tipoSeguro" name="tipoSeguro" required>
+                            <option value="">Selecciona un tipo de seguro</option>
+                            <option value="salud">Seguro de Salud</option>
+                            <option value="vida">Seguro de Vida</option>
+                            <option value="auto">Seguro de Automóvil</option>
+                        </select>
+                    </div>
 
-            <div class="mb-3">
-                <label for="cobertura" class="form-label">Cobertura</label>
-                <select class="form-select" id="cobertura" name="cobertura" required>
-                    <option value="">Selecciona el nivel de cobertura</option>
-                    <option value="basico">Básico</option>
-                    <option value="medio">Medio</option>
-                    <option value="alto">Alto</option>
-                </select>
-            </div>
+                    <div class="mb-3">
+                        <label for="cobertura" class="form-label">Cobertura</label>
+                        <select class="form-select" id="cobertura" name="cobertura" required>
+                            <option value="">Selecciona el nivel de cobertura</option>
+                            <option value="basico">Básico</option>
+                            <option value="medio">Medio</option>
+                            <option value="alto">Alto</option>
+                        </select>
+                    </div>
 
-            <div class="mb-3">
-                <label for="duracion" class="form-label">Duración (en años)</label>
-                <input type="number" class="form-control" id="duracion" name="duracion" required min="1" max="10">
-            </div>
+                    <div class="mb-3">
+                        <label for="duracion" class="form-label">Duración (en años)</label>
+                        <input type="number" class="form-control" id="duracion" name="duracion" required min="1" max="10">
+                    </div>
 
-            <div class="mb-3">
-                <button type="submit" class="btn btn-primary">Calcular</button>
+                    <div class="mb-3 text-center">
+                        <button type="submit" class="btn btn-primary btn-lg w-100">Calcular</button>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
 
         <!-- Resultados de la calculadora -->
         <?php if ($_SERVER['REQUEST_METHOD'] == 'POST'): ?>
@@ -82,7 +90,7 @@ include('navbar.php');
                 $precioFinal = $precioCobertura * $duracion;
             ?>
 
-            <div class="alert alert-success mt-4" role="alert">
+            <div class="alert alert-success mt-4">
                 <h4 class="alert-heading">Resultado Estimado</h4>
                 <p><strong>Tipo de Seguro:</strong> <?= ucfirst($tipoSeguro) ?></p>
                 <p><strong>Cobertura:</strong> <?= ucfirst($cobertura) ?></p>
@@ -92,6 +100,10 @@ include('navbar.php');
         <?php endif; ?>
     </main>
 
+    <!-- Incluir jQuery y Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
     <?php include('footer.php'); ?>
 </body>
 </html>
