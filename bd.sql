@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `saveme`
 --
+CREATE DATABASE SaveMe;
+USE SaveMe;
 
 -- --------------------------------------------------------
 
@@ -32,6 +34,11 @@ CREATE TABLE `metodos_pago` (
   `nombre_metodo` varchar(50) NOT NULL,
   `descripcion` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `metodos_pago`(`id`, `nombre_metodo`, `descripcion`) VALUES
+	(1, "Tarjeta de Crédito", "Pago mediante tarjeta"),
+    (2, "Transferencia Bancaria", "Pago mediante transferencia"),
+    (3, "Efectivo", "Pago mediante efectivo");
 
 -- --------------------------------------------------------
 
