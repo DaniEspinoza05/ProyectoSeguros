@@ -51,7 +51,7 @@ if ($result && $result->num_rows > 0) {
             <section class="mb-4">
                 <h2 class="h4 mb-3">2. Personalización de la Póliza</h2>
                 <div class="form-group mb-3">
-                    <label class="form-label">Coberturas adicionales:</label>
+                    <label style="font-weight: bold;" style="f">Coberturas adicionales:</label>
                     <div class="form-check">
                         <input type="checkbox" name="cobertura[]" value="Accidentes Personales" class="form-check-input" id="cobertura1">
                         <label class="form-check-label" for="cobertura1">Accidentes Personales</label>
