@@ -84,6 +84,7 @@ if (!$result) {
                             <td><?= htmlspecialchars($row['fecha_disponible_hasta']) ?></td>
                             <td><?= htmlspecialchars($row['id_tipo_seguro']) ?></td>
                             <td>
+                            <a href="administrativo.php?id=<?= $row['id'] ?>" class="btn btn-primary">Añadir</a>
                             <a href="EditarSeguro.php?id=<?= $row['id'] ?>" class="btn btn-warning btn-sm">Editar</a>
                             <a href="EliminarSeguro.php?id=<?= $row['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar este seguro?')">Eliminar</a>
                             </td>

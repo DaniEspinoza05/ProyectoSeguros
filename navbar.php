@@ -12,7 +12,7 @@
                 <li class="menu-item"><a href="calculadora.php">Calculadora de Pólizas</a></li>
                 <li class="menu-item"><a href="sobre-nosotros.php">Sobre Nosotros</a></li>
                 <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 1): ?>
-                    <li class="menu-item"><a href="administrativo.php">Administrativo</a></li>
+                    <li class="menu-item"><a href="verSeguros.php">Administrativo</a></li>
                 <?php endif; ?>
                 <li class="menu-item"><a href="carrito.php">Carrito</a></li>
                 <?php if (isset($_SESSION['username'])): ?>

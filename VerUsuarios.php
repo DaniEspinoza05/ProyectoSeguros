@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('db_connection.php'); // Archivo de conexión a la base de datos
+include('navbarAdmin.php'); // Navbar para el diseño superior
 
 // Verificar si el usuario tiene rol de administrador
 if (!isset($_SESSION['username']) || $_SESSION['rol'] != 1) {
@@ -26,6 +27,7 @@ if (!$result) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Usuarios</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
     <style>
         .table-container {
             max-width: 80%;
@@ -88,5 +90,6 @@ if (!$result) {
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <?php include('footer.php'); ?>
 </body>
 </html>
