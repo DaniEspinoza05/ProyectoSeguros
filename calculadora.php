@@ -48,13 +48,30 @@ if ($result && $result->num_rows > 0) {
             </section>
 
             <!-- Cobertura Adicional -->
+            <!-- Personalización de la Póliza -->
             <section class="mb-4">
-                <h2 class="h4 mb-3">2. Cobertura Adicional</h2>
+                <h2 class="h4 mb-3">2. Personalización de la Póliza</h2>
                 <div class="form-group mb-3">
-                    <label for="cobertura" class="form-label">Cobertura Adicional (opcional):</label>
-                    <input type="text" class="form-control" id="cobertura" name="cobertura">
+                    <label style="font-weight: bold;">Coberturas adicionales:</label>
+                    <div class="form-check">
+                        <input type="checkbox" name="cobertura[]" value="Accidentes Personales" class="form-check-input" id="cobertura1">
+                        <label class="form-check-label" for="cobertura1">Accidentes Personales</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" name="cobertura[]" value="Robo" class="form-check-input" id="cobertura2">
+                        <label class="form-check-label" for="cobertura2">Robo</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" name="cobertura[]" value="Daños Materiales" class="form-check-input" id="cobertura3">
+                        <label class="form-check-label" for="cobertura3">Daños Materiales</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" name="cobertura[]" value="Asistencia en el Extranjero" class="form-check-input" id="cobertura4">
+                        <label class="form-check-label" for="cobertura4">Asistencia en el Extranjero</label>
+                    </div>
                 </div>
             </section>
+
 
             <!-- Duración -->
             <section class="mb-4">
@@ -73,34 +90,34 @@ if ($result && $result->num_rows > 0) {
 
         <?php
         // Calcular el precio cuando se envía el formulario
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['tipo_seguro'], $_POST['duracion'])) {
-            $tipoSeguroId = $_POST['tipo_seguro'];
-            $cobertura = $_POST['cobertura'];
-            $duracion = $_POST['duracion'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['tipo_seguro'], $_POST['duracion'])) {
+    $tipoSeguroId = $_POST['tipo_seguro'];
+    $cobertura = $_POST['cobertura'];
+    $duracion = $_POST['duracion'];
 
-            // Obtener los datos del seguro seleccionado desde la base de datos
-            $query = $conn->query("SELECT * FROM seguros WHERE id = $tipoSeguroId");
-            $seguro = $query->fetch_assoc();
+    // Obtener los datos del seguro seleccionado desde la base de datos
+    $query = $conn->query("SELECT * FROM seguros WHERE id = $tipoSeguroId");
+    $seguro = $query->fetch_assoc();
 
-            if ($seguro) {
-                // Calcular el precio total basado en la prima mensual y la duración
-                $primaMensual = $seguro['prima_mensual'];
-                $precioFinal = $primaMensual * 12 * $duracion; // Total por la duración en años (12 meses por año)
+    if ($seguro) {
+        // Calcular el precio total basado en la prima mensual y la duración
+        $primaMensual = $seguro['prima_mensual'];
+        $precioFinal = $primaMensual * 12 * $duracion; // Total por la duración en años (12 meses por año)
 
-                // Si hay cobertura adicional, sumar un valor simbólico (por ejemplo, $50 extra por cobertura adicional)
-                if (!empty($cobertura)) {
-                    $precioFinal += 50; // Esto puede ajustarse
-                }
-        ?>
-            <!-- Mostrar los resultados -->
-            <div class="alert alert-success mt-4">
-                <h4 class="alert-heading">Resultado Estimado</h4>
-                <p><strong>Seguro Seleccionado:</strong> <?= htmlspecialchars($seguro['nombre']) ?></p>
-                <p><strong>Descripción:</strong> <?= htmlspecialchars($seguro['descripcion']) ?></p>
-                <p><strong>Cobertura Adicional:</strong> <?= htmlspecialchars($cobertura) ?: 'Ninguna' ?></p>
-                <p><strong>Duración:</strong> <?= $duracion ?> años</p>
-                <p><strong>Precio Estimado de la Póliza:</strong> $<?= number_format($precioFinal, 2) ?></p>
-            </div>
+        // Si hay cobertura adicional, sumar un valor simbólico (por ejemplo, $50 extra por cobertura adicional)
+        if (!empty($cobertura)) {
+            $precioFinal += 50; // Esto puede ajustarse
+        }
+?>
+        <!-- Mostrar los resultados -->
+        <div class="alert alert-success mt-4">
+            <h4 class="alert-heading">Resultado Estimado</h4>
+            <p><strong>Seguro Seleccionado:</strong> <?= htmlspecialchars($seguro['nombre']) ?></p>
+            <p><strong>Descripción:</strong> <?= htmlspecialchars($seguro['descripcion']) ?></p>
+            <p><strong>Cobertura Adicional:</strong> <?= is_array($cobertura) ? htmlspecialchars(implode(', ', $cobertura)) : 'Ninguna' ?></p>
+            <p><strong>Duración:</strong> <?= $duracion ?> años</p>
+            <p><strong>Precio Estimado de la Póliza:</strong> $<?= number_format($precioFinal, 2) ?></p>
+        </div>
         <?php
             } else {
                 echo "<div class='alert alert-danger mt-4'>No se pudo encontrar el seguro seleccionado.</div>";
