@@ -2,6 +2,12 @@
 session_start(); // Iniciar sesión
 include('db_connection.php'); // Conexión a la base de datos
 
+// Verificar si el usuario está autenticado
+if (!isset($_SESSION['username'])) {
+    header('Location: login.php');
+    exit;
+}
+
 // Obtener el nombre de usuario activo
 $username = $_SESSION['username'];
 
@@ -40,6 +46,19 @@ while ($row = $result->fetch_assoc()) {
 $pagoQuery = $conn->prepare("SELECT id, nombre_metodo, descripcion FROM metodos_pago");
 $pagoQuery->execute();
 $pagoResult = $pagoQuery->get_result();
+
+// Redirigir a la página correspondiente según el método de pago
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $metodoPago = $_POST['metodo_pago'] ?? null;
+    if ($metodoPago == 1) { // Tarjeta
+        header("Location: tarjeta.php");
+    } elseif ($metodoPago == 2) { // Transferencia
+        header("Location: transferencia.php");
+    } elseif ($metodoPago == 3) { // Efectivo
+        header("Location: efectivo.php");
+    }
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +67,6 @@ $pagoResult = $pagoQuery->get_result();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resumen de Pago - SaveMe</title>
-
     <link href="css/index.css" rel="stylesheet">
     <style>
         .table {
@@ -123,7 +141,7 @@ $pagoResult = $pagoQuery->get_result();
 
         <!-- Selección de métodos de pago -->
         <h4>Selecciona tu método de pago:</h4>
-        <form action="procesar_pago.php" method="POST">
+        <form action="pago.php" method="POST">
             <table class="table">
                 <thead>
                     <tr>
@@ -147,7 +165,7 @@ $pagoResult = $pagoQuery->get_result();
 
             <!-- Botones de acción -->
             <div>
-                <button type="submit" class="btn btn-success">Pagar</button>
+                <button type="submit" class="btn btn-success">Continuar</button>
                 <a href="carrito.php" class="btn btn-secondary">Volver al Carrito</a>
             </div>
         </form>
