@@ -17,47 +17,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $userId = $resultUser->fetch_assoc()['id'];
 
     // Datos del formulario
-    $tipo_seguro = (int)$_POST['tipo_seguro']; // Cambiado a id
+    $tipo_seguro = (int)$_POST['tipo_seguro'];
     $cobertura = isset($_POST['cobertura']) ? implode(", ", $_POST['cobertura']) : '';
     $periodo = (int)$_POST['periodo'];
-    $metodo_pago = $conn->real_escape_string($_POST['metodo_pago']);
 
     // Buscar el seguro seleccionado por id
     $querySeguro = "SELECT id, prima_mensual FROM seguros WHERE id = '$tipo_seguro'";
     $resultSeguro = $conn->query($querySeguro);
+
     if ($resultSeguro->num_rows > 0) {
         $seguro = $resultSeguro->fetch_assoc();
         $seguroId = $seguro['id'];
         $primaMensual = $seguro['prima_mensual'];
 
-        // Buscar el método de pago seleccionado
-        $queryMetodoPago = "SELECT id FROM metodos_pago WHERE nombre_metodo = '$metodo_pago'";
-        $resultMetodoPago = $conn->query($queryMetodoPago);
-        if ($resultMetodoPago->num_rows > 0) {
-            $metodoPagoId = $resultMetodoPago->fetch_assoc()['id'];
+        // Verificar si ya existe una personalización igual
+        $queryExistente = "
+            SELECT 1 FROM personalizacion_polizas 
+            WHERE id_usuario = $userId AND id_seguro = $seguroId AND cobertura_adicional = '$cobertura' AND periodo = $periodo";
+        $resultExistente = $conn->query($queryExistente);
 
+        if ($resultExistente->num_rows == 0) {
             // Insertar personalización en `personalizacion_polizas`
             $queryPersonalizacion = "
                 INSERT INTO personalizacion_polizas (id_usuario, id_seguro, cobertura_adicional, periodo)
                 VALUES ($userId, $seguroId, '$cobertura', $periodo)";
+
             if ($conn->query($queryPersonalizacion) === TRUE) {
-                // Registrar el pago en `pagos`
+                // Calcular monto total
                 $montoTotal = $primaMensual * $periodo;
-                $queryPago = "
-                    INSERT INTO pagos (id_usuario, id_seguro, id_metodo_pago, monto)
-                    VALUES ($userId, $seguroId, $metodoPagoId, $montoTotal)";
-                if ($conn->query($queryPago) === TRUE) {
-                    // Redirigir al usuario con un mensaje de éxito
-                    header("Location: confirmacion.php?status=success&monto=$montoTotal");
-                    exit();
-                } else {
-                    echo "Error en el pago: " . $conn->error;
-                }
+
+                // Redirigir al usuario con PRG Pattern
+                header("Location: confirmacion.php?status=success&monto=$montoTotal");
+                exit();
             } else {
                 echo "Error en la personalización de la póliza: " . $conn->error;
             }
         } else {
-            echo "Método de pago no válido.";
+            echo "Esta personalización ya existe.";
         }
     } else {
         echo "Seguro no encontrado.";

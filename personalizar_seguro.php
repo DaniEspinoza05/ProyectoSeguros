@@ -69,23 +69,14 @@ if ($result && $result->num_rows > 0) {
                         <label class="form-check-label" for="cobertura4">Asistencia en el Extranjero</label>
                     </div>
                 </div>
-                <div class="form-group mb-3">
-                    <label for="periodo" class="form-label">Duración (meses):</label>
-                    <input type="number" id="periodo" name="periodo" class="form-control" min="1" max="24" required>
-                </div>
             </section>
 
             <!-- Método de Pago -->
             <section class="mb-4">
-                <h2 class="h4 mb-3">3. Método de Pago</h2>
+                <h2 class="h4 mb-3">3. Duración</h2>
                 <div class="form-group mb-3">
-                    <label for="metodo_pago" class="form-label">Selecciona el método de pago:</label>
-                    <select id="metodo_pago" name="metodo_pago" class="form-select" required>
-                        <option value="" disabled selected>Seleccione un método de pago</option>
-                        <option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
-                        <option value="Transferencia Bancaria">Transferencia Bancaria</option>
-                        <option value="Efectivo">Efectivo</option>
-                    </select>
+                    <label for="periodo" class="form-label">La cantidad de meses por la cual desea aplicar el seguro seleccionado.</label>
+                    <input type="number" id="periodo" name="periodo" class="form-control" min="1" max="24" required>
                 </div>
             </section>
 
