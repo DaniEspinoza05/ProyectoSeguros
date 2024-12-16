@@ -55,3 +55,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+function vaciarTablaYConfirmar() {
+    // Crear una solicitud AJAX para vaciar la tabla
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "vaciar_tabla.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            // Tabla vaciada exitosamente, redirigir a confirmacion_compra.php
+            window.location.href = "confirmacion_compra.php";
+        }
+    };
+    xhr.send();
+}

@@ -10,6 +10,7 @@ include('db_connection.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagar con Transferencia - SaveMe</title>
     <link href="css/index.css" rel="stylesheet">
+    <script type = "text/javascript" src="js/JavaScript.js"></script>
 </head>
 <body>
     <?php include('navbar.php'); ?>
@@ -21,7 +22,7 @@ include('db_connection.php');
                 <input type="file" id="comprobante" name="comprobante" accept=".pdf, .jpg, .jpeg, .png" required>
             </div>
             <br>
-            <button type="submit" class="btn btn-success">Pagar</button>
+            <button type="button" class="btn btn-success" onclick="vaciarTablaYConfirmar()">Pagar</button>
             <button class="btn btn-secondary" onclick="window.location.href='pago.php'">Volver</button>
 
         </form>
