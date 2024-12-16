@@ -2,6 +2,12 @@
 session_start(); // Iniciar sesión
 include('db_connection.php'); // Conexión a la base de datos
 
+// Verificar si el usuario ha iniciado sesión
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
+
 // Obtener el ID de sesión actual
 $sessionId = session_id();
 
