@@ -82,10 +82,7 @@ if (!$result) {
             </table>
         </div>
 
-        <!-- Botón para volver al área administrativa -->
-        <div class="btn-volver">
-            <a href="administrativo.php" class="btn btn-primary">Volver al Panel Administrativo</a>
-        </div>
+        
     </div>
 
     <!-- Bootstrap JS -->

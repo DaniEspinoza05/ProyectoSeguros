@@ -1,7 +1,7 @@
 <?php
-$servername = "localhost:3306";
+$servername = "localhost:3307";
 $username = "root"; // usuario de MySQL
-$password = "10Estupidos"; // contraseña de MySQL
+$password = "12345678"; // contraseña de MySQL
 $dbname = "SaveMe";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
