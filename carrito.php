@@ -79,28 +79,31 @@ $total = 0;
         <h1>Carrito de Compras</h1>
 
         <!-- Tabla del carrito -->
-        <table class="table">
+        <table class="table" style="width: 100%; border-collapse: collapse; margin-bottom: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <thead>
-                <tr>
-                    <th>Seguro</th>
-                    <th>Cobertura Adicional</th>
-                    <th>Periodo</th>
-                    <th>Precio</th>
-                    <th>Total</th>
-                    <th>Acción</th>
+                <tr style="background-color: #007bff; color: white; text-transform: uppercase;">
+                    <th style="padding: 10px; border: 1px solid #ddd;">Seguro</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Cobertura Adicional</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Periodo</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Precio</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Total</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Acción</th>
                 </tr>
             </thead>
             <tbody>
                 <?php if (!empty($carrito)): ?>
                     <?php foreach ($carrito as $item): ?>
-                        <tr>
-                            <td><?= htmlspecialchars($item['nombre']) ?></td>
-                            <td><?= htmlspecialchars($item['cobertura_adicional']) ?></td>
-                            <td><?= intval($item['periodo']) ?> meses</td>
-                            <td>$<?= number_format($item['monto'], 2) ?></td>
-                            <td>$<?= number_format($item['monto'] * $item['periodo'], 2) ?></td>
-                            <td>
-                                <a href="carrito.php?remove=<?= urlencode($item['personalizacion_id']) ?>" class="btn btn-danger">Eliminar</a>
+                        <tr style="background-color: #f9f9f9; text-align: center;">
+                            <td style="padding: 10px; border: 1px solid #ddd;"><?= htmlspecialchars($item['nombre']) ?></td>
+                            <td style="padding: 10px; border: 1px solid #ddd;"><?= htmlspecialchars($item['cobertura_adicional']) ?></td>
+                            <td style="padding: 10px; border: 1px solid #ddd;"><?= intval($item['periodo']) ?> meses</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">$<?= number_format($item['monto'], 2) ?></td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">$<?= number_format($item['monto'] * $item['periodo'], 2) ?></td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">
+                                <a href="carrito.php?remove=<?= urlencode($item['personalizacion_id']) ?>" 
+                                style="color: white; background-color: #dc3545; padding: 6px 12px; text-decoration: none; border-radius: 5px;">
+                                Eliminar
+                                </a>
                             </td>
                         </tr>
                         <?php 
@@ -110,18 +113,22 @@ $total = 0;
                     <?php endforeach; ?>
                 <?php else: ?>
                     <tr>
-                        <td colspan="6">El carrito está vacío.</td>
+                        <td colspan="6" style="padding: 20px; text-align: center; border: 1px solid #ddd;">
+                            El carrito está vacío.
+                        </td>
                     </tr>
                 <?php endif; ?>
             </tbody>
         </table>
 
+
         <!-- Mostrar el total -->
         <h3>Total: $<?= number_format($total, 2) ?></h3>
 
         <!-- Botones de acción -->
-        <a href="pago.php" class="btn btn-success">Proceder al Pago</a>
-        <a href="personalizar_seguro.php" class="btn btn-secondary">Seguir Comprando</a>
+        <button class="btn btn-success btn-lg" onclick="window.location.href='pago.php'">Proceder al Pago</button>
+        <button class="btn btn-success btn-lg" onclick="window.location.href='personalizar_seguro.php'">Seguir Comprando</button>
+
     </div>
 
     <?php include('footer.php'); ?>

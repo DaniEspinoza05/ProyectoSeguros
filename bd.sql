@@ -148,24 +148,6 @@ INSERT INTO `usuarios` (`id`, `username`, `password`, `rol`) VALUES
 -- Índices para tablas volcadas
 --
 
--- Crear la tabla carrito
-CREATE TABLE carrito (
-    id INT AUTO_INCREMENT PRIMARY KEY,      -- Identificador único para cada entrada
-    session_id VARCHAR(255) NOT NULL,       -- Identificador único de la sesión o usuario
-    seguro_id INT NOT NULL,                 -- Relación con la tabla 'seguros'
-    cantidad INT NOT NULL DEFAULT 1,        -- Cantidad del seguro en el carrito
-    fecha_agregado TIMESTAMP DEFAULT NOW(), -- Fecha en la que se agregó al carrito
-    FOREIGN KEY (seguro_id) REFERENCES seguros(id) -- Llave foránea con la tabla 'seguros'
-);
-
--- Insertar datos de prueba en la tabla carrito
-INSERT INTO carrito (session_id, seguro_id, cantidad) VALUES
-('session_123', 6, 2), -- Usuario con ID de sesión 'session_123' agregó 2 seguros de automóviles
-('session_123', 7, 1), -- Usuario con ID de sesión 'session_123' agregó 1 seguro de vida
-('session_456', 8, 3), -- Usuario con ID de sesión 'session_456' agregó 3 seguros de propiedades
-('session_456', 9, 1); -- Usuario con ID de sesión 'session_456' agregó 1 seguro de salud
-
-
 --
 -- Indices de la tabla `metodos_pago`
 --
@@ -279,4 +261,4 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
-select * from personalizacion_poliza
+select * from personalizacion_polizas
